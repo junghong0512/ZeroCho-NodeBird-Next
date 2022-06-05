@@ -14,28 +14,40 @@ const SearchInput = styled(Input.Search)`
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const menuItems = [
+    {
+      label: (
+        <Link href='/'>
+          <a>Home</a>
+        </Link>
+      ),
+      key: 'home',
+    },
+    {
+      label: (
+        <Link href='/profile'>
+          <a>Profile</a>
+        </Link>
+      ),
+      key: 'profile',
+    },
+    {
+      label: <SearchInput />,
+      key: 'search',
+    },
+    {
+      label: (
+        <Link href='/signup'>
+          <a>Signup</a>
+        </Link>
+      ),
+      key: 'signup',
+    },
+  ];
+
   return (
     <div>
-      <Menu mode='horizontal'>
-        <Menu.Item key='home'>
-          <Link href='/'>
-            <a>Home</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='profile'>
-          <Link href='/profile'>
-            <a>Profile</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='search'>
-          <SearchInput />
-        </Menu.Item>
-        <Menu.Item key='signup'>
-          <Link href='/signup'>
-            <a>Signup</a>
-          </Link>
-        </Menu.Item>
-      </Menu>
+      <Menu mode='horizontal' items={menuItems} />
       <Row gutter={4}>
         <Col xs={24} md={6}>
           {isLoggedIn ? (

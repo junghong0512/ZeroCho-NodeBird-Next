@@ -18,7 +18,7 @@ export const initialState = {
           src: 'https://i.pinimg.com/564x/04/79/64/04796444135b5b89b28000375128fe79.jpg',
         },
       ],
-      Comment: [
+      Comments: [
         {
           User: {
             nickname: 'User 11',

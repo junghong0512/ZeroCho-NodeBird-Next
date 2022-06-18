@@ -14,9 +14,9 @@ export const initialState = {
         {
           src: 'https://i.pinimg.com/564x/18/0e/c1/180ec17fe05df1dda7ea86a62694322a.jpg',
         },
-        {
-          src: 'https://i.pinimg.com/564x/04/79/64/04796444135b5b89b28000375128fe79.jpg',
-        },
+        // {
+        //   src: 'https://i.pinimg.com/564x/04/79/64/04796444135b5b89b28000375128fe79.jpg',
+        // },
       ],
       Comments: [
         {

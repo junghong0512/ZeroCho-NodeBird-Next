@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Input, Menu, Row, Col } from 'antd';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import LoginForm from './LoginForm';
 import UserProfile from './UserProfile';
@@ -42,11 +42,27 @@ const menuItems = [
   },
 ];
 
+const Global = createGlobalStyle`
+  .ant-row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .ant-col:first-child {
+    padding-left: 0 !important;
+  }
+
+  .ant-col:last-child {
+    padding-right: 0 !important;
+  }
+`;
+
 const AppLayout = ({ children }) => {
   const { isLoggedIn } = useSelector((state) => state.user);
 
   return (
     <div>
+      <Global />
       <Menu mode='horizontal' items={menuItems} />
       <Row gutter={4}>
         <Col xs={24} md={6}>

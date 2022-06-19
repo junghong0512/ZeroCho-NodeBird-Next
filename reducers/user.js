@@ -6,7 +6,8 @@ export const initialState = {
 };
 
 export const loginAction = (data) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState();
     dispatch(loginRequestAction());
     axios
       .post('/api/login')

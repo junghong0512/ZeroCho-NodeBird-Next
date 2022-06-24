@@ -1,5 +1,7 @@
 export const initialState = {
+  isLoggingIn: false, // 로그인 시도중
   isLoggedIn: false,
+  isLoggingOut: false, // 로그아웃 시도중
   me: null,
   signUpData: {},
   loginData: {},
@@ -25,16 +27,18 @@ export const loginRequestAction = (data) => ({
   type: 'LOG_IN_REQUEST',
   data,
 });
-// ACTION CREATOR(로그인 성공)
-export const loginSuccessAction = (data) => ({
-  type: 'LOG_IN_SUCCESS',
-  data,
-});
-// ACTION CREATOR(로그인 실패)
-export const loginFailureAction = (data) => ({
-  type: 'LOG_IN_FAILURE',
-  data,
-});
+
+// 두 액션은 Saga가 호출하는 액션이기 떄문에 필요없음
+// // ACTION CREATOR(로그인 성공)
+// export const loginSuccessAction = (data) => ({
+//   type: 'LOG_IN_SUCCESS',
+//   data,
+// });
+// // ACTION CREATOR(로그인 실패)
+// export const loginFailureAction = (data) => ({
+//   type: 'LOG_IN_FAILURE',
+//   data,
+// });
 
 // ACTION CREATOR(로그아웃 요청)
 export const logoutRequestAction = () => ({
@@ -51,17 +55,40 @@ export const logoutFailureAction = () => ({
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOG_IN':
+    case 'LOG_IN_REQUEST':
       return {
         ...state,
-        isLoggedIn: true,
-        me: action.data,
+        isLoggingIn: true,
       };
-    case 'LOG_OUT':
+    case 'LOG_IN_SUCCESS':
+      return {
+        ...state,
+        isLoggingIn: false,
+        isLoggedIn: true,
+        me: { ...action.data, nickname: 'junghong' },
+      };
+    case 'LOG_IN_FAILURE':
       return {
         ...state,
         isLoggedIn: false,
+        isLoggingIn: false,
+      };
+    case 'LOG_OUT_REQUEST':
+      return {
+        ...state,
+        isLoggingOut: true,
+      };
+    case 'LOG_OUT_SUCCESS':
+      return {
+        ...state,
+        isLoggedIn: false,
+        isLoggingOut: false,
         me: null,
+      };
+    case 'LOG_OUT_FAILURE':
+      return {
+        ...state,
+        isLoggingOut: false,
       };
     default:
       return state;
